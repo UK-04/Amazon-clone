@@ -2,10 +2,14 @@ import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
+
 let cartSummaryHTML = '';
+let totalQuantity = 0; // total items in cart
 
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
+
+  totalQuantity += cartItem.quantity;
 
   let matchingProduct;
 
@@ -94,9 +98,15 @@ cart.forEach((cartItem) => {
   `;
 });
 
+// changes the checkout header quantity
+document.querySelector('.js-cart-quantity')
+  .innerHTML = `${totalQuantity} items`;
+
+// displays the generated html
 document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
 
+// makes delete button delete items
 document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
