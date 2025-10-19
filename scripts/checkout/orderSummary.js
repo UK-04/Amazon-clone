@@ -45,7 +45,7 @@ export function renderOrderSummary() {
             <span>
               Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary">
+            <span class="update-quantity-link link-primary js-update-button">
               Update
             </span>
             <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
@@ -64,6 +64,10 @@ export function renderOrderSummary() {
     </div>
     `;
   });
+
+  function updateQuantity() {
+  
+  }
 
   function formatDate(day) {
     return day.format('dddd, MMMM D');
@@ -116,6 +120,7 @@ export function renderOrderSummary() {
         const productId = link.dataset.productId;
         removeFromCart(productId);
         renderPaymentSummary();
+        renderOrderSummary()
 
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
